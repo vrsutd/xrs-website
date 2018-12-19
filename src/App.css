@@ -1,0 +1,31 @@
+@import '~antd/dist/antd.css';
+
+/* TODO: correctly modify ant CSS */
+
+.ant-layout {
+  height: 100vh;
+  min-height: 568px;
+}
+
+.ant-menu.ant-menu-dark 
+.ant-menu-item-selected, 
+.ant-menu-submenu-popup.ant-menu-dark 
+.ant-menu-item-selected {
+  background-color: #0a9998;
+}
+
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color .3s;
+}
+
+.trigger:hover {
+  color: #0a9998;
+}
+
+.logo {
+  margin: 8px;
+}
