@@ -4,16 +4,16 @@ Currently in development.
 
 ## TODO:
 
-[ ] Properly modify ant CSS
+- [ ] Properly modify ant CSS
 
-[ ] Nav bar layout
+- [ ] Nav bar layout
 
-- [ ] Affix nav bar and collapse toggle
+  - [ ] Affix nav bar and collapse toggle
 
-- [ ] Modify logo source
+  - [ ] Modify logo source
 
-- [ ] Show XRS when nav bar extended
+  - [ ] Show XRS when nav bar extended
 
-- [ ] Proper routing for menu items
+  - [ ] Proper routing for menu items
 
-- [ ] Proper header
+  - [ ] Proper header
