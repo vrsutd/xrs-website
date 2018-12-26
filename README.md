@@ -14,6 +14,6 @@ Currently in development.
 
   - [ ] Show XRS when nav bar extended
 
-  - [ ] Proper routing for menu items
+  - [x] Proper routing for menu items
 
-  - [ ] Proper header
+  - [ ] ~~Proper header~~ Pseudo-sticky header
