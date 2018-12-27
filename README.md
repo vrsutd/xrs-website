@@ -17,3 +17,5 @@ Currently in development.
   - [x] Proper routing for menu items
 
   - [ ] ~~Proper header~~ Pseudo-sticky header
+
+- [ ] Lazy load page

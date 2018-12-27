@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Carousel, Layout, Menu, Icon, Avatar } from 'antd';
+import { Layout, Menu, Icon, Avatar } from 'antd';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import MediaQuery from 'react-responsive';
+import MenuIcon from '@material-ui/icons/Menu';
 import moment from 'moment';
 
+import Home from './Home';
+import Events from './Events';
+import Team from './Team';
+import Apply from './Apply';
+import Join from './Join';
+import Contact from './Contact';
 import './App.css';
 
 const { Header, Sider, Content, Footer } = Layout;
-
-const Home = () => <h2>Home</h2>;
-const Events = () => <h2>Events</h2>;
-const Team = () => <h2>Team</h2>;
-const Apply = () => <h2>Apply</h2>;
-const Join = () => <h2>Join</h2>;
-const Contact = () => <h2>Contact</h2>;
 
 class App extends Component {
   state = {
@@ -32,6 +33,7 @@ class App extends Component {
     return (
       <Router>
       <div className="App">
+      <MediaQuery minWidth={768}>
         <Layout className="ant-layout">
           <Sider
             trigger={null}
@@ -96,27 +98,46 @@ class App extends Component {
               </AppBar>
             </Header>
             <Content style={{
-              margin: '24px 16px', padding: 24, background: '#fff', minHeight: 'calc(100% - 240px)'
+              background: '#fff', minHeight: 'calc(100% - 192px)'
             }}
-            >
-              {/* <Carousel autoplay>
-                <div><h3>1</h3></div>
-                <div><h3>2</h3></div>
-                <div><h3>3</h3></div>
-                <div><h3>4</h3></div>
-              </Carousel> */}
-              
+            > 
               <Route path="/" exact component={Home} />
               <Route path="/events/" component={Events} />
               <Route path="/team/" component={Team} />
               <Route path="/apply/" component={Apply} />
               <Route path="/join/" component={Join} />
-              <Route path="/contact/" component={Contact} />
-              
+              <Route path="/contact/" component={Contact} /> 
             </Content>
             <Footer style={{background: '#273644', minHeight: 128, color: '#fff' }}>Extended Reality Society &copy; {moment().format('YYYY')}</Footer>
           </Layout>
         </Layout>
+      </MediaQuery>
+      <MediaQuery maxWidth={768}>
+        <Layout>
+          <Header style={{ background: '#fff', padding: 0 }}>
+            <AppBar position="fixed" style={{background: '#273644'}}>
+              <Toolbar disableGutters={true}>
+                <Icon className="trigger" type='menu-unfold'/>
+                <Typography variant="h6" color="inherit">
+                  Extended Reality Society
+                </Typography>
+              </Toolbar>
+              </AppBar>
+          </Header>
+          <Content style={{
+            background: '#fff', minHeight: 'calc(100% - 192px)'
+          }}
+          > 
+            <Route path="/" exact component={Home} />
+            <Route path="/events/" component={Events} />
+            <Route path="/team/" component={Team} />
+            <Route path="/apply/" component={Apply} />
+            <Route path="/join/" component={Join} />
+            <Route path="/contact/" component={Contact} /> 
+          </Content>
+          <Footer style={{background: '#273644', minHeight: 128, color: '#fff' }}>Extended Reality Society &copy; {moment().format('YYYY')}</Footer>
+        </Layout>
+      </MediaQuery>
       </div>
       </Router>
     );
