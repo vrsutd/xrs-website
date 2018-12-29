@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import MediaQuery from 'react-responsive';
-import MenuIcon from '@material-ui/icons/Menu';
+import Drawer from '@material-ui/core/Drawer';
 import moment from 'moment';
 
 import Home from './Home';
@@ -21,11 +21,18 @@ const { Header, Sider, Content, Footer } = Layout;
 class App extends Component {
   state = {
     collapsed: false,
+    drawerOpen: false,
   };
 
   toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed,
+    });
+  }
+
+  toggleDrawer = () => {
+    this.setState({
+      drawerOpen: !this.state.drawerOpen,
     });
   }
 
@@ -117,12 +124,23 @@ class App extends Component {
           <Header style={{ background: '#fff', padding: 0 }}>
             <AppBar position="fixed" style={{background: '#273644'}}>
               <Toolbar disableGutters={true}>
-                <Icon className="trigger" type='menu-unfold'/>
+                <Icon 
+                    className="trigger" 
+                    type='menu-unfold' 
+                    onClick={this.toggleDrawer}
+                  />
                 <Typography variant="h6" color="inherit">
                   Extended Reality Society
                 </Typography>
               </Toolbar>
-              </AppBar>
+            </AppBar>
+            <Drawer 
+              className="drawer" 
+              open={this.state.drawerOpen} 
+              onClose={this.toggleDrawer}
+            >
+              
+            </Drawer>
           </Header>
           <Content style={{
             background: '#fff', minHeight: 'calc(100% - 192px)'

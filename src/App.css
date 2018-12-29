@@ -31,3 +31,8 @@
 .logo {
   margin: 8px;
 }
+
+.drawer {
+  width: 200px;
+  background-color: #001528;
+}
