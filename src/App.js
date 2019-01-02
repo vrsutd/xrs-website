@@ -15,6 +15,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
+import Avatar from '@material-ui/core/Avatar';
 
 import Home from './Home';
 import About from './About';
@@ -37,8 +38,12 @@ const styles = theme => ({
       flexShrink: 0,
     },
   },
-  link: {
-    textDecoration: 'none',
+  menuItem: {
+    color: '#512DA8', // ripple
+    width: '100%',
+    '&:hover': {
+      background: '#b2dfdb',
+    },
   },
   appBar: {
     marginLeft: drawerWidth,
@@ -61,6 +66,25 @@ const styles = theme => ({
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
   },
+  selectedItem: {
+    background: '#b2dfdb !important', // doesn't work if `!important` is not set
+  },
+  logo: {
+    height: 56,
+    width: 56,
+    marginLeft: 16,
+  },
+  toolbarInner: {
+    height: 64,
+    display: 'flex',
+    alignItems: 'center',
+  },
+  selectedText: {
+    color: '#0a9998',
+  },
+  itemText: {
+    color: '#212121',
+  },
 });
 
 class App extends Component {
@@ -75,12 +99,56 @@ class App extends Component {
 
   handleListItemClick = (event, index) => {
     this.setState({ selectedIndex: index });
+    if (this.state.mobileOpen) this.handleDrawerToggle();
   };
 
   render() {
     var appbarTitle = 'Extended Reality Society';
 
     const { classes, theme } = this.props;
+
+    const drawer = (
+      <div>
+        <div className={classes.toolbar}>
+          <div className={classes.toolbarInner}>
+            <Avatar 
+              src={process.env.PUBLIC_URL + '/logo.png'} 
+              className={classes.logo} 
+              component={Link}
+              onClick={event => this.handleListItemClick(event, 0)}
+              to="/" />
+          </div>
+        </div>
+        <Divider />
+        <List>
+          {[
+            {name: "About", link: "/about/", icon: "description"}, 
+            {name: "Team", link: "/team/", icon: "group"},
+            {name: "Events", link: "/events/", icon: "event"},
+            {name: "Join", link: "/join/", icon: "person_add"}, 
+            {name: "Apply", link: "/apply/", icon: "edit"},
+            {name: "Contact", link: "/contact/", icon: "mail_outline"}
+          ].map((item, index) => (
+            <ListItem
+              key={index+1}
+              button
+              dense
+              className={classes.menuItem}
+              component={Link}
+              to={item.link}
+              selected={this.state.selectedIndex === index+1}
+              onClick={event => this.handleListItemClick(event, index+1)}
+              classes={{
+                selected: classes.selectedItem
+              }}
+            >
+              <Icon className={this.state.selectedIndex === index+1 ? classes.selectedText : classes.itemText} fontSize="small">{item.icon}</Icon>
+              <div className={this.state.selectedIndex === index+1 ? classes.selectedText : classes.itemText}>{item.name}</div>
+            </ListItem>
+          ))}
+        </List>
+      </div>
+    );
 
     return (
       <Router>
@@ -114,75 +182,7 @@ class App extends Component {
                   paper: classes.drawerPaper,
                 }}
               >
-                <div>
-                  <div className={classes.toolbar} />
-                  <Divider />
-                  <List>
-                    <Link className={classes.link} to="/about/">
-                      <ListItem 
-                        button 
-                        selected={this.state.selectedIndex === 0}
-                        onClick={event => this.handleListItemClick(event, 0)}
-                      >
-                        <ListItemIcon><Icon>description</Icon></ListItemIcon>
-                        <ListItemText primary="About" />
-                      </ListItem>
-                    </Link>
-                    <Link className={classes.link} to="/team/">
-                      <ListItem 
-                        button 
-                        selected={this.state.selectedIndex === 1}
-                        onClick={event => this.handleListItemClick(event, 1)}
-                      >
-                        <ListItemIcon><Icon>group</Icon></ListItemIcon>
-                        <ListItemText primary="Team" />
-                      </ListItem>
-                    </Link>
-                    <Link className={classes.link} to="/events/">
-                      <ListItem 
-                        button 
-                        selected={this.state.selectedIndex === 2}
-                        onClick={event => this.handleListItemClick(event, 2)}
-                      >
-                        <ListItemIcon><Icon>event</Icon></ListItemIcon>
-                        <ListItemText primary="Events" />
-                      </ListItem>
-                    </Link>
-                  </List>
-                  <Divider />
-                  <List>
-                    <Link className={classes.link} to="/join/">
-                      <ListItem 
-                        button 
-                        selected={this.state.selectedIndex === 3}
-                        onClick={event => this.handleListItemClick(event, 3)}
-                      >
-                        <ListItemIcon><Icon>person_add</Icon></ListItemIcon>
-                        <ListItemText primary="Join" />
-                      </ListItem>
-                    </Link>
-                    <Link className={classes.link} to="/apply/">
-                      <ListItem 
-                        button 
-                        selected={this.state.selectedIndex === 4}
-                        onClick={event => this.handleListItemClick(event, 4)}
-                      >
-                        <ListItemIcon><Icon>edit</Icon></ListItemIcon>
-                        <ListItemText primary="Apply" />
-                      </ListItem>
-                    </Link>
-                    <Link className={classes.link} to="/contact/">
-                      <ListItem 
-                        button 
-                        selected={this.state.selectedIndex === 5}
-                        onClick={event => this.handleListItemClick(event, 5)}
-                      >
-                        <ListItemIcon><Icon>mail_outline</Icon></ListItemIcon>
-                        <ListItemText primary="Contact" />
-                      </ListItem>
-                    </Link>
-                  </List>
-                </div>
+                {drawer}
               </Drawer>
             </Hidden>
             <Hidden xsDown implementation="css">
@@ -193,75 +193,7 @@ class App extends Component {
                 variant="permanent"
                 open
               >
-                <div>
-                  <div className={classes.toolbar} />
-                  <Divider />
-                  <List>
-                    <Link className={classes.link} to="/about/">
-                      <ListItem 
-                        button 
-                        selected={this.state.selectedIndex === 0}
-                        onClick={event => this.handleListItemClick(event, 0)}
-                      >
-                        <ListItemIcon><Icon>description</Icon></ListItemIcon>
-                        <ListItemText primary="About" />
-                      </ListItem>
-                    </Link>
-                    <Link className={classes.link} to="/team/">
-                      <ListItem 
-                        button 
-                        selected={this.state.selectedIndex === 1}
-                        onClick={event => this.handleListItemClick(event, 1)}
-                      >
-                        <ListItemIcon><Icon>group</Icon></ListItemIcon>
-                        <ListItemText primary="Team" />
-                      </ListItem>
-                    </Link>
-                    <Link className={classes.link} to="/events/">
-                      <ListItem 
-                        button 
-                        selected={this.state.selectedIndex === 2}
-                        onClick={event => this.handleListItemClick(event, 2)}
-                      >
-                        <ListItemIcon><Icon>event</Icon></ListItemIcon>
-                        <ListItemText primary="Events" />
-                      </ListItem>
-                    </Link>
-                  </List>
-                  <Divider />
-                  <List>
-                    <Link className={classes.link} to="/join/">
-                      <ListItem 
-                        button 
-                        selected={this.state.selectedIndex === 3}
-                        onClick={event => this.handleListItemClick(event, 3)}
-                      >
-                        <ListItemIcon><Icon>person_add</Icon></ListItemIcon>
-                        <ListItemText primary="Join" />
-                      </ListItem>
-                    </Link>
-                    <Link className={classes.link} to="/apply/">
-                      <ListItem 
-                        button 
-                        selected={this.state.selectedIndex === 4}
-                        onClick={event => this.handleListItemClick(event, 4)}
-                      >
-                        <ListItemIcon><Icon>edit</Icon></ListItemIcon>
-                        <ListItemText primary="Apply" />
-                      </ListItem>
-                    </Link>
-                    <Link className={classes.link} to="/contact/">
-                      <ListItem 
-                        button 
-                        selected={this.state.selectedIndex === 5}
-                        onClick={event => this.handleListItemClick(event, 5)}
-                      >
-                        <ListItemIcon><Icon>mail_outline</Icon></ListItemIcon>
-                        <ListItemText primary="Contact" />
-                      </ListItem>
-                    </Link>
-                  </List>
-                </div>
+                {drawer}
               </Drawer>
             </Hidden>
           </nav>
