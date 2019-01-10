@@ -9,13 +9,12 @@ import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import Avatar from '@material-ui/core/Avatar';
+import ButtonBase from '@material-ui/core/ButtonBase';
 
 import Home from './Home';
 import About from './About';
@@ -45,6 +44,11 @@ const styles = theme => ({
       background: '#b2dfdb',
     },
   },
+  logoButton: {
+    color: '#512DA8',
+    borderRadius: '50%',
+    marginLeft: 16,
+  },
   appBar: {
     marginLeft: drawerWidth,
     [theme.breakpoints.up('sm')]: {
@@ -64,7 +68,7 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
+    marginTop: 64,
   },
   selectedItem: {
     background: '#b2dfdb !important', // doesn't work if `!important` is not set
@@ -72,7 +76,6 @@ const styles = theme => ({
   logo: {
     height: 56,
     width: 56,
-    marginLeft: 16,
   },
   toolbarInner: {
     height: 64,
@@ -84,6 +87,15 @@ const styles = theme => ({
   },
   itemText: {
     color: '#212121',
+  },
+  footer: {
+    minHeight: 128,
+    background: '#46474f',
+  },
+  innerContent: {
+    padding: 16,
+    minHeight: 'calc(100vh - 192px)',
+    overflow: 'scroll',
   },
 });
 
@@ -111,12 +123,14 @@ class App extends Component {
       <div>
         <div className={classes.toolbar}>
           <div className={classes.toolbarInner}>
+          <ButtonBase className={classes.logoButton}>
             <Avatar 
               src={process.env.PUBLIC_URL + '/logo.png'} 
               className={classes.logo} 
               component={Link}
               onClick={event => this.handleListItemClick(event, 0)}
               to="/" />
+          </ButtonBase>
           </div>
         </div>
         <Divider />
@@ -143,7 +157,7 @@ class App extends Component {
               }}
             >
               <Icon className={this.state.selectedIndex === index+1 ? classes.selectedText : classes.itemText} fontSize="small">{item.icon}</Icon>
-              <div className={this.state.selectedIndex === index+1 ? classes.selectedText : classes.itemText}>{item.name}</div>
+              <div style={{marginLeft: 16}} className={this.state.selectedIndex === index+1 ? classes.selectedText : classes.itemText}>{item.name}</div>
             </ListItem>
           ))}
         </List>
@@ -198,15 +212,19 @@ class App extends Component {
             </Hidden>
           </nav>
           <main className={classes.content}>
-            <div className={classes.toolbar} />
-            <Route path="/" exact component={Home} />
-            <Route path="/about/" component={About} />
-            <Route path="/team/" component={Team} />
-            <Route path="/events/" component={Events} />
-            <Route path="/join/" component={Join} />
-            <Route path="/apply/" component={Apply} />
-            <Route path="/contact/" component={Contact} />
-          </main>
+            <div className={classes.innerContent}>
+              <Route path="/" exact component={Home} />
+              <Route path="/about/" component={About} />
+              <Route path="/team/" component={Team} />
+              <Route path="/events/" component={Events} />
+              <Route path="/join/" component={Join} />
+              <Route path="/apply/" component={Apply} />
+              <Route path="/contact/" component={Contact} />
+            </div>
+            <div className={classes.footer}>
+            
+            </div>
+        </main>
         </div>
       </Router>
     );
