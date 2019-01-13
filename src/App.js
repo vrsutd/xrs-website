@@ -13,11 +13,12 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
-import Avatar from '@material-ui/core/Avatar';
-import ButtonBase from '@material-ui/core/ButtonBase';
+// import Avatar from '@material-ui/core/Avatar';
+// import ButtonBase from '@material-ui/core/ButtonBase';
+import MediaQuery from 'react-responsive';
+import moment from 'moment';
 
 import Home from './Home';
-import About from './About';
 import Team from './Team';
 import Events from './Events';
 import Join from './Join';
@@ -57,7 +58,7 @@ const styles = theme => ({
     background: '#0a9998',
   },
   menuButton: {
-    marginRight: 20,
+    marginRight: 6,
     [theme.breakpoints.up('sm')]: {
       display: 'none',
     },
@@ -89,13 +90,19 @@ const styles = theme => ({
     color: '#212121',
   },
   footer: {
-    minHeight: 128,
+    minHeight: 96,
     background: '#46474f',
+    color: '#fff',
+    padding: 16,
+    fontSize: 12,
+    position: 'relative',
   },
   innerContent: {
     padding: 16,
-    minHeight: 'calc(100vh - 192px)',
+    minHeight: 'calc(100vh - 160px)',
+    maxWidth: 796,
     overflow: 'scroll',
+    margin: '0 auto',
   },
 });
 
@@ -115,28 +122,33 @@ class App extends Component {
   };
 
   render() {
-    var appbarTitle = 'Extended Reality Society';
-
     const { classes, theme } = this.props;
+    const { router } = this.context
+    const { path } = this.props
+    if (path && router) {
+      const { location } = router
+      console.log(location.pathname)
+    }
 
     const drawer = (
       <div>
+        {console.log(this.props)}
         <div className={classes.toolbar}>
           <div className={classes.toolbarInner}>
-          <ButtonBase className={classes.logoButton}>
+          {/* <ButtonBase className={classes.logoButton}>
             <Avatar 
               src={process.env.PUBLIC_URL + '/logo.png'} 
               className={classes.logo} 
               component={Link}
               onClick={event => this.handleListItemClick(event, 0)}
               to="/" />
-          </ButtonBase>
+          </ButtonBase> */}
           </div>
         </div>
         <Divider />
         <List>
           {[
-            {name: "About", link: "/about/", icon: "description"}, 
+            {name: "Home", link: "/", icon: "home"},
             {name: "Team", link: "/team/", icon: "group"},
             {name: "Events", link: "/events/", icon: "event"},
             {name: "Join", link: "/join/", icon: "person_add"}, 
@@ -144,20 +156,20 @@ class App extends Component {
             {name: "Contact", link: "/contact/", icon: "mail_outline"}
           ].map((item, index) => (
             <ListItem
-              key={index+1}
+              key={index}
               button
               dense
               className={classes.menuItem}
               component={Link}
               to={item.link}
-              selected={this.state.selectedIndex === index+1}
-              onClick={event => this.handleListItemClick(event, index+1)}
+              selected={this.state.selectedIndex === index}
+              onClick={event => this.handleListItemClick(event, index)}
               classes={{
                 selected: classes.selectedItem
               }}
             >
-              <Icon className={this.state.selectedIndex === index+1 ? classes.selectedText : classes.itemText} fontSize="small">{item.icon}</Icon>
-              <div style={{marginLeft: 16}} className={this.state.selectedIndex === index+1 ? classes.selectedText : classes.itemText}>{item.name}</div>
+              <Icon className={this.state.selectedIndex === index ? classes.selectedText : classes.itemText} fontSize="small">{item.icon}</Icon>
+              <div style={{marginLeft: 16}} className={this.state.selectedIndex === index ? classes.selectedText : classes.itemText}>{item.name}</div>
             </ListItem>
           ))}
         </List>
@@ -165,6 +177,7 @@ class App extends Component {
     );
 
     return (
+
       <Router>
         <div className={classes.root}>
           <CssBaseline />
@@ -179,7 +192,12 @@ class App extends Component {
                 <Icon>menu</Icon>
               </IconButton>
               <Typography variant="h6" color="inherit" noWrap>
-                {appbarTitle}
+                <MediaQuery query="(min-width: 345px)">
+                  Extended Reality Society
+                </MediaQuery>
+                <MediaQuery query="(max-width: 344px)">
+                  XRS
+                </MediaQuery>
               </Typography>
             </Toolbar>
           </AppBar>
@@ -214,7 +232,6 @@ class App extends Component {
           <main className={classes.content}>
             <div className={classes.innerContent}>
               <Route path="/" exact component={Home} />
-              <Route path="/about/" component={About} />
               <Route path="/team/" component={Team} />
               <Route path="/events/" component={Events} />
               <Route path="/join/" component={Join} />
@@ -222,7 +239,8 @@ class App extends Component {
               <Route path="/contact/" component={Contact} />
             </div>
             <div className={classes.footer}>
-            
+              <span style={{position:'absolute', bottom:42, right:16}}><a style={{color:'#fff', textDecoration:'none'}} href="https://utdallas.edu" target="_blank" rel="noopener noreferrer">The University of Texas at Dallas</a></span>
+              <span style={{position:'absolute', bottom:16, right:16}}>&copy; {moment().format('YYYY')} Extended Reality Society</span>
             </div>
         </main>
         </div>
