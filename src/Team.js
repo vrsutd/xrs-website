@@ -64,7 +64,7 @@ class Team extends Component {
           </div>
           <div style={{width:252}}></div>
         </div>
-        <h2 style={{marginLeft:48, marginTop:72}}>Advisors</h2>
+        <h2 style={{fontSize:28, marginLeft:48, marginTop:72}}>Advisors</h2>
         <div style={{display:'flex', flexFlow:'row wrap', justifyContent:'center'}}>
           <div style={{width:252, textAlign:'center', padding:16}}>
             <Avatar alt="Dr. Ryan McMahan" src="/people/dr_mcmahan.jpg" className={classes.avatar} />
