@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Link, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,14 +17,12 @@ import Icon from '@material-ui/core/Icon';
 // import ButtonBase from '@material-ui/core/ButtonBase';
 import MediaQuery from 'react-responsive';
 import moment from 'moment';
-
 import Home from './Home';
 import Team from './Team';
 import Events from './Events';
 import Join from './Join';
 import Apply from './Apply';
 import Contact from './Contact';
-
 
 const drawerWidth = 240;
 
@@ -123,16 +121,9 @@ class App extends Component {
 
   render() {
     const { classes, theme } = this.props;
-    const { router } = this.context
-    const { path } = this.props
-    if (path && router) {
-      const { location } = router
-      console.log(location.pathname)
-    }
 
     const drawer = (
       <div>
-        {console.log(this.props)}
         <div className={classes.toolbar}>
           <div className={classes.toolbarInner}>
           {/* <ButtonBase className={classes.logoButton}>
@@ -177,8 +168,6 @@ class App extends Component {
     );
 
     return (
-
-      <Router>
         <div className={classes.root}>
           <CssBaseline />
           <AppBar position="fixed" className={classes.appBar}>
@@ -231,12 +220,14 @@ class App extends Component {
           </nav>
           <main className={classes.content}>
             <div className={classes.innerContent}>
-              <Route path="/" exact component={Home} />
-              <Route path="/team/" component={Team} />
-              <Route path="/events/" component={Events} />
-              <Route path="/join/" component={Join} />
-              <Route path="/apply/" component={Apply} />
-              <Route path="/contact/" component={Contact} />
+              <BrowserRouter>
+                <Route path="/" exact component={Home} />
+                <Route path="/team/" component={Team} />
+                <Route path="/events/" component={Events} />
+                <Route path="/join/" component={Join} />
+                <Route path="/apply/" component={Apply} />
+                <Route path="/contact/" component={Contact} />
+              </BrowserRouter>
             </div>
             <div className={classes.footer}>
               <span style={{position:'absolute', bottom:42, right:16}}><a style={{color:'#fff', textDecoration:'none'}} href="https://utdallas.edu" target="_blank" rel="noopener noreferrer">The University of Texas at Dallas</a></span>
@@ -244,7 +235,6 @@ class App extends Component {
             </div>
         </main>
         </div>
-      </Router>
     );
   }
 }
