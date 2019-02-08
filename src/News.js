@@ -80,7 +80,7 @@ const styles = theme => ({
     fontSize: 14,
   },
   spacer: {
-    height: 'calc(100vh - 1003px)',
+    height: 'calc(100vh - 1039px)',
   },
 });
 
@@ -101,8 +101,8 @@ class News extends Component {
             <List className={classes.list}>
               <ListItem className={classes.listItem}>
                 <Paper className={classes.itemPaper} elevation={1}>
-                  <h3>Title</h3>
-                  <p>Content</p>
+                  <h3>Welcome Sector 5 Digital!</h3>
+                  <p>We are proud to sponsored by Sector 5 Digital. Check out their amazing work <a className={classes.link} href="http://www.sector5digital.com/site.html?platform=desktop" target="_blank" rel="noopener noreferrer" >here</a>.</p>
                 </Paper>
               </ListItem>
             </List>
@@ -115,16 +115,18 @@ class News extends Component {
             <List className={classes.list}>
               <ListItem className={classes.listItem}>
                 <Paper className={classes.itemPaper} elevation={1}>
-                  <h3 className={classes.itemTitle}>Title</h3>
+                  <h3 className={classes.itemTitle}>Snapchat Lens Studio Workshop</h3>
                   <p className={classes.eventInfo}>
                     <Icon className={classes.eventIcon}>access_time</Icon>
-                    start and end times
+                    Febuary 12th 8:30pm
                   </p>
                   <p className={classes.eventInfo}>
                     <Icon className={classes.eventIcon}>location_on</Icon>
-                    <a className={classes.link} href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">location</a>
+                    <a className={classes.link} href="https://www.utdallas.edu/locator/ECSS_2#!/ECSS_2.415" target="_blank" rel="noopener noreferrer">
+                      ECSS 2.415
+                    </a>
                   </p>
-                  <p>Content</p>
+                  <p>Come join us for our Snapchat lens studio workshop co-hosted by HackUTD!</p>
                 </Paper>
               </ListItem>
             </List>

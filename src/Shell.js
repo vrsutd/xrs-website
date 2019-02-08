@@ -76,7 +76,7 @@ class Shell extends Component {
     return (
       <div className={classes.root}>
         <CssBaseline />
-        <Appbar title="Title" handleDrawerToggle={this.handleDrawerToggle} 
+        <Appbar title="XRS" handleDrawerToggle={this.handleDrawerToggle} 
           value={25} hidden={true} />
         <AppDrawer open={open} mobileOpen={mobileOpen} 
           handleDrawerToggle={this.handleDrawerToggle} 

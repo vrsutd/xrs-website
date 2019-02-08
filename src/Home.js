@@ -73,6 +73,12 @@ const styles = theme => ({
   section: {
     maxWidth: 1024,
     margin: '0 auto',
+    padding: '48px 0',
+  },
+  link: {
+    color: '#0c897b',
+    textDecoration: 'none',
+    borderBottom: '1px dotted #a8c4c4',
   },
   demo: {
     margin: '64px 0',
@@ -131,16 +137,39 @@ class Home extends Component {
       <div className={classes.root}>
         <div className={classes.hero}>
           <img className={classes.heroLogo} src={logo} alt="hero" />
-          <h1 className={classes.heroHeading}>Title</h1>
+          <h1 className={classes.heroHeading}>Extended Reality Society</h1>
         </div>
         <div className={classes.content}>
+          
           <section className={classes.section}>
-            <h2 className={classes.heading}>Heading 1</h2>
-            <p>Try-hard tofu blog, sartorial cliche brooklyn plaid snackwave cardigan chartreuse church-key 
-            stumptown synth pour-over kitsch. Vexillologist PBR&B lyft selfies viral tumblr cliche kitsch 
-            bitters drinking vinegar whatever plaid kale chips skateboard vaporware. Hella twee small batch, 
-            kombucha fixie vinyl kickstarter man braid letterpress pour-over cliche freegan. Vegan keytar blog 
-            disrupt, poke iceland artisan godard helvetica selfies poutine church-key.</p>
+            <h2 className={classes.heading}>A Bit About Us</h2>
+            <p>We are a group of UT Dallas students who are excited about all things XR. Established in 2016, 
+            as the Virtual Reality Society (VRS), we were inspired by the cutting edge VR applications. We wanted to
+            share and explore these VR applications with our community. In 2018, VRS was rebranded to the Extended
+            Reality Society (XRS) to include the spectrum from "completely real" to "completely virtual" applications,
+            which include mixed reality, augmented reality. Despite our rebranding, our mission has stayed the same:
+            we strive to promote awareness of XR to the UT Dallas and DFW community by providing information and resources
+            to community members interested in XR.</p>
+          </section>
+          
+          <section className={classes.section}>
+            <h2 className={classes.heading}>What is XR?</h2>
+            <p>Extended Reality describes the human computer interaction to achieve stages of emersion with a virtual environment.
+              XR encompasses the spectrum from completely virtual environments to virtual enviroments augmented on top of physical
+              ("real") environments &mdash; and a combination of the two.
+            </p>
+          </section>
+
+          <section className={classes.section}> https://www.youtube.com/watch?v=lil_I_-7aOM
+            <h2 className={classes.heading}>Try it out!</h2>
+            <p>Try out a simple 360 video player from &nbsp;
+              <a className={classes.link} href="https://www.youtube.com/watch?v=lil_I_-7aOM" target="_blank" rel="noopener noreferrer">NASA</a> 
+            &nbsp; built using &nbsp;
+              <a className={classes.link} href="https://facebook.github.io/react-360/" target="_blank" rel="noopener noreferrer">React360</a> 
+            . You can learn to create cool projects like this at our workshops. To find out more about workshops and related events, 
+            check out our &nbsp;
+            <a className={classes.link} href="/news">news page</a> 
+            !</p>
           </section>
           
           <div className={classes.demo}>
@@ -156,17 +185,6 @@ class Home extends Component {
                 onLoad={this.handleFrameLoaded} />
             </div>
           </div>
-
-          <section className={classes.section}>
-            <h2 className={classes.heading}>Heading 2</h2>
-            <p>Deep v palo santo cred, butcher roof party austin williamsburg pinterest fanny pack fashion axe 
-              chia. Gluten-free wolf tilde meditation, everyday carry flannel letterpress keytar helvetica 
-              vexillologist hexagon skateboard. Kinfolk cray portland, trust fund aesthetic distillery iceland blog 
-              activated charcoal air plant four loko polaroid blue bottle. Crucifix church-key fanny pack organic 
-              tumeric, iceland you probably haven't heard of them taiyaki sartorial leggings marfa four loko. 
-              Chartreuse mixtape coloring book art party iceland meh, tacos celiac. Umami jean shorts semiotics, 
-              vice fashion axe neutra blue bottle copper mug banjo twee direct trade.</p>
-          </section>
 
         </div>
       </div>
