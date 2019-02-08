@@ -31,19 +31,20 @@ const theme = createMuiTheme({
 });
 
 class App extends Component {
-  state = {
-    route: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      route: '',
+    };
+  }
 
   componentWillMount() {
     // Init route
-    this.setRoute(this.props.location.pathname);
     var pathname = getParameterByName('pathname');
     if (pathname == null) {
       this.setRoute(this.props.location.pathname);
     } else {
       window.location.assign(pathname);
-      window.location.replace(process.env.PUBLIC_URL + pathname);
       this.setRoute(pathname);
     }
   }
