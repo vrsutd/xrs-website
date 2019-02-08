@@ -42,6 +42,7 @@ class App extends Component {
     if (pathname == null) {
       this.setRoute(this.props.location.pathname);
     } else {
+      window.location.assign(pathname);
       window.location.replace(process.env.PUBLIC_URL + pathname);
       this.setRoute(pathname);
     }
