@@ -41,7 +41,7 @@ class Contact extends Component {
 
         <section className={classes.section}>
           <h2 className={classes.heading}>Facebook</h2>
-          <a className={classes.link} href="https://www.facebook.com/groups/573214729555025/" target="_blank" rel="noopener noreferrer">https://www.facebook.com/groups/573214729555025/</a>
+          <a className={classes.link} href="https://www.facebook.com/groups/xrsutd/" target="_blank" rel="noopener noreferrer">https://www.facebook.com/groups/573214729555025/</a>
         </section>
 
         <div className={classes.spacer}></div>
