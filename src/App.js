@@ -5,7 +5,7 @@ import Shell from './Shell';
 
 function getParameterByName(name, url) {
   if (!url) url = window.location.href;
-  name = name.replace(/[\[\]]/g, '\\$&');
+  name = name.replace(/[[\]]/g, '\\$&');
   var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
       results = regex.exec(url);
   if (!results) return null;
@@ -44,7 +44,7 @@ class App extends Component {
     if (pathname == null) {
       this.setRoute(this.props.location.pathname);
     } else {
-      window.location.assign(pathname);
+      this.props.history.replace(pathname, {});
       this.setRoute(pathname);
     }
   }
