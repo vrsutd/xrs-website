@@ -1,88 +1,182 @@
 import React, { Component } from 'react';
-import mapboxgl from 'mapbox-gl';
-import LazyHero from 'react-lazy-hero';
-import MediaQuery from 'react-responsive';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab';
+import Icon from '@material-ui/core/Icon';
+import logo from './logo.png';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoieHJzdXRkIiwiYSI6ImNqcXRueXFnaDBicmg0MXJjaTY1cmR6NXMifQ.TAgPQ6qobDRufM2AqG2coQ';
+const styles = theme => ({
+  hero: {
+    width: '100%',
+    backgroundColor: '#a8c4c4', 
+    textAlign: 'center',
+    [theme.breakpoints.down('lg')]: {
+      height: 800, 
+      paddingTop: 150, 
+    },
+    [theme.breakpoints.down('md')]: {
+      height: 650, 
+      paddingTop: 120, 
+    },
+    [theme.breakpoints.down('sm')]: {
+      height: 450, 
+      paddingTop: 70, 
+    },
+  },
+  heroLogo: {
+    backgroundColor: '#262626',
+    [theme.breakpoints.down('lg')]: {
+      width: 200, 
+      height: 200, 
+      borderRadius: 25,
+    },
+    [theme.breakpoints.down('md')]: {
+      width: 180, 
+      height: 180, 
+      borderRadius: 15,
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: 120, 
+      height: 120, 
+      borderRadius: 9,
+    },
+  },
+  heroHeading: {
+    [theme.breakpoints.down('lg')]: {
+      fontSize: 64,
+      paddingTop: 36,
+    },
+    [theme.breakpoints.down('md')]: {
+      fontSize: 56,
+      paddingTop: 24,
+    },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 42,
+      paddingTop: 18,
+    },
+  },
+  content: {
+    padding: theme.spacing.unit * 3,
+  },
+  heading: {
+    color: '#00695c',
+    [theme.breakpoints.down('lg')]: {
+      fontSize: 32,
+    },
+    [theme.breakpoints.down('md')]: {
+      fontSize: 28,
+    },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 24,
+    },
+  },
+  section: {
+    maxWidth: 1024,
+    margin: '0 auto',
+  },
+  demo: {
+    margin: '64px 0',
+  },
+  demoText: {
+    margin: '5px 0',
+    fontWeight: 600,
+    color: '#0c897b',
+  },
+  demoContainer: {
+    backgroundColor: '#f2f2f2',
+    position: 'relative',
+  },
+  _scrollOverlay: {
+    height: 550, 
+    width: '100%', 
+    backgroundColor: 'rgba(168, 196, 196, 0.6)',
+    position: 'absolute',
+    top: 0, 
+    left: 0,
+  },
+  fab: {
+    position: 'absolute',
+    right: 20,
+    bottom: 200,
+  },
+});
 
 class Home extends Component {
-  state = {
-    lng: -96.7505148,
-    lat: 32.9861116,
-    zoom: 17
-  };
-
-  componentDidMount() {
-    const map = new mapboxgl.Map({
-      container: this.mapContainer,
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [this.state.lng, this.state.lat],
-      zoom: this.state.zoom
-    });
-    new mapboxgl.Marker()
-      .setLngLat([this.state.lng+0.00016, this.state.lat+0.00016])
-      .addTo(map);
-    map.scrollZoom.disable();
+  constructor(props) {
+    super(props);
+    this.state = {
+      overlay: true,
+      frameLoaded: false,
+    };
   }
 
+  handleFabClick = () => {
+    this.setState({ overlay: !this.state.overlay });
+  };
+
+  handleImageLoaded = () => {
+    console.log('asdf');
+    this.setState({ imageLoaded: true });
+  };
+
+  handleFrameLoaded = () => {
+    this.setState({ frameLoaded: true });
+  };
+
   render() {
-    const styles = {
-      title: {
-        fontSize: 48,
-        textAlign: 'center',
-      },
-      mapContainer: {
-        position: 'relative',
-        height: 400,
-        width: '100%',
-      },
-      map: {
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        width: '100%'
-      },
-    };
+    const { classes } = this.props;
+    const { overlay, frameLoaded } = this.state;
 
-
-    return(
-      <div>
-        <LazyHero 
-          imageSrc="/placeholder.jpg"
-          color="#77aaa9"
-          opacity={0.4}
-          minHeight="400px"
-          parallaxOffset={100}>
-          <MediaQuery query="(min-width: 842px)">
-            <h1 style={{fontSize:46, color:'#fff'}}>Extended Reality Society</h1>
-          </MediaQuery>
-          <MediaQuery query="(max-width: 841px)">
-            <MediaQuery query="(min-width: 367px)">
-              <h1 style={{fontSize:38, color:'#fff'}}>Extended Reality<br/> Society</h1>
-            </MediaQuery>
-            <MediaQuery query="(max-width: 366px)">
-              <h1 style={{fontSize:32, color:'#fff'}}>Extended Reality<br/> Society</h1>
-            </MediaQuery>
-          </MediaQuery>
-        </LazyHero>
-
-        <p style={{marginTop:74, textAlign:'center'}}>We are the Extended Reality Society (XRS) at the University of Texas at Dallas. Founded in 2017, we have stayed true to our mission of []. XRS is devoted to [].</p>
-        
-        <section style={{marginTop:128}}>
-          <h2>What is XR?</h2>
-          <p>Extended Reality (XR) is [].</p>
-        </section>
-
-        <section style={{marginTop:128, marginBottom:128}}>
-          <h2>Location</h2>
-          <p>Our general meetings are usually held in the Erik Jonsson School of Engineering South (<a style={{color:'#0a9998', textDecoration:'none', borderBottom:'dotted 1px #0a9998'}} href="https://www.openstreetmap.org/search?query=32.9861116%2C-96.7505148#map=18/32.98611/-96.75051" target="_blank" rel="noopener noreferrer">ECSS</a>) building. Find out more about upcoming events here!</p>
-          <div style={styles.mapContainer}>
-            <div style={styles.map} ref={el => this.mapContainer = el} />
+    return (
+      <div className={classes.root}>
+        <div className={classes.hero}>
+          <img className={classes.heroLogo} src={logo} alt="hero" />
+          <h1 className={classes.heroHeading}>Title</h1>
+        </div>
+        <div className={classes.content}>
+          <section className={classes.section}>
+            <h2 className={classes.heading}>Heading 1</h2>
+            <p>Try-hard tofu blog, sartorial cliche brooklyn plaid snackwave cardigan chartreuse church-key 
+            stumptown synth pour-over kitsch. Vexillologist PBR&B lyft selfies viral tumblr cliche kitsch 
+            bitters drinking vinegar whatever plaid kale chips skateboard vaporware. Hella twee small batch, 
+            kombucha fixie vinyl kickstarter man braid letterpress pour-over cliche freegan. Vegan keytar blog 
+            disrupt, poke iceland artisan godard helvetica selfies poutine church-key.</p>
+          </section>
+          
+          <div className={classes.demo}>
+            <p className={classes.demoText}>Click on the floating action button to toggle the overlay for 
+            interacting with the 360 video.</p>
+            <div className={classes.demoContainer}>
+              {overlay && <div className={classes._scrollOverlay} />}
+              {frameLoaded && 
+              <Fab size="small" color="secondary" aria-label="Toggle-overlay" className={classes.fab} onClick={this.handleFabClick}>
+                <Icon>{overlay ? 'touch_app' : 'not_interested'}</Icon>
+              </Fab>}
+              <iframe src={process.env.PUBLIC_URL +  '/react360/index.html'} height="550" width="100%" frameBorder="0" title="360-demo" 
+                onLoad={this.handleFrameLoaded} />
+            </div>
           </div>
-        </section>
+
+          <section className={classes.section}>
+            <h2 className={classes.heading}>Heading 2</h2>
+            <p>Deep v palo santo cred, butcher roof party austin williamsburg pinterest fanny pack fashion axe 
+              chia. Gluten-free wolf tilde meditation, everyday carry flannel letterpress keytar helvetica 
+              vexillologist hexagon skateboard. Kinfolk cray portland, trust fund aesthetic distillery iceland blog 
+              activated charcoal air plant four loko polaroid blue bottle. Crucifix church-key fanny pack organic 
+              tumeric, iceland you probably haven't heard of them taiyaki sartorial leggings marfa four loko. 
+              Chartreuse mixtape coloring book art party iceland meh, tacos celiac. Umami jean shorts semiotics, 
+              vice fashion axe neutra blue bottle copper mug banjo twee direct trade.</p>
+          </section>
+
+        </div>
       </div>
-    )
+    );
   }
 }
 
-export default Home;
+Home.propTypes = {
+  classes: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles, { withTheme: true })(Home);
