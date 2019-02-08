@@ -160,7 +160,7 @@ class Home extends Component {
             </p>
           </section>
 
-          <section className={classes.section}> https://www.youtube.com/watch?v=lil_I_-7aOM
+          <section className={classes.section}>
             <h2 className={classes.heading}>Try it out!</h2>
             <p>Try out a simple 360 video player from &nbsp;
               <a className={classes.link} href="https://www.youtube.com/watch?v=lil_I_-7aOM" target="_blank" rel="noopener noreferrer">NASA</a> 
