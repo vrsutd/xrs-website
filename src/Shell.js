@@ -89,14 +89,14 @@ class Shell extends Component {
             {path: 'join', name: 'Join', icon: 'person_add'},
           ]} />
         <AppContent open={open}>
-          <Switch>
+          {/* <Switch>
             <Route exact path='/' render={(props) => <Home {...props} />} />
             <Route exact path='/team' render={(props) => <Team {...props} />} />
             <Route exact path='/news' render={(props) => <News {...props} />} />
             <Route exact path='/contact' render={(props) => <Contact {...props} />} />
             <Route exact path='/join' render={(props) => <Join {...props} />} />
             <Route exact path='*' component={NotFound} />
-          </Switch>
+          </Switch> */}
         </AppContent>
       </div>
     );
