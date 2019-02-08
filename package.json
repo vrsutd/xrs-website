@@ -1,7 +1,7 @@
 {
   "name": "my-app",
   "version": "0.1.0",
-  "homepage": "https://calebfung.github.io/react-scaffold",
+  "homepage": "http://xrsutd.org",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.1",
