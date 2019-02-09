@@ -43,7 +43,7 @@ class Join extends Component {
       <div className={classes.content}>
         <section className={classes.section}>
           <h1 className={classes.title}>Join</h1>
-          <p>Join our mailing list and Discord server up to date announcements about exciting events and all things XR!</p>
+          <p>Join our mailing list and Discord server for up to date announcements about exciting events and all things XR!</p>
         </section>
         
         <section className={classNames(classes.section, classes.sectionSpacing)}>

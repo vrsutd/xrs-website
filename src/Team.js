@@ -14,7 +14,7 @@ import corrine from './corrine.jpg';
 import alyssa from './alyssa.jpg';
 import calvin from './calvin.jpg'
 import richard from './richard.png';
-import joshua from './joshua.png';
+import joshua from './joshua.jpg';
 import drmcmahan from './drmcmahan.png';
 
 const styles = theme => ({
