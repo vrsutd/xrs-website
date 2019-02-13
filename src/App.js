@@ -53,6 +53,7 @@ class App extends Component {
     // Route changed
     if (this.props.location.pathname !== prevProps.location.pathname) {
       this.setRoute(this.props.location.pathname);
+      window.scrollTo(0, 0);
     }
   }
 
